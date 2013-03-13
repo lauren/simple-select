@@ -1,0 +1,11 @@
+/*
+* Copyright 2013 Lauren Sperber
+* https://github.com/lauren/simple-select/blob/master/LICENSE
+*/
+body{font-family:helvetica;font-weight:200;}
+.container{clear:both;}
+.random{margin:0 auto;text-align:center;padding:5px;}
+.circle,.big-square,.square{vertical-align:middle;text-align:center;float:left;margin:15px 5px;}
+.big-square{width:50em;height:50em;position:relative;}
+.circle{width:10em;height:10em;-webkit-border-radius:50%;-moz-border-radius:50%;-o-border-radius:50%;border-radius:50%;}
+.square{width:10em;height:10em;}

@@ -1,0 +1,60 @@
+/*
+* Copyright 2013 Lauren Sperber
+* https://github.com/lauren/simple-select/blob/master/LICENSE
+*/
+
+//// mixins
+
+.rounded-corners (@radius: 4px) {
+	-webkit-border-radius: @radius;
+	   -moz-border-radius: @radius;
+			 -o-border-radius: @radius;
+	        border-radius: @radius;
+}
+
+//// variables
+
+@big: 50em;
+@medium: 30em;
+@small: 10em;
+
+//// styles
+
+body {
+	font-family: helvetica;
+	font-weight: 200;
+}
+
+.container {
+	clear:both;
+}
+
+.random {
+	margin:0 auto;
+	text-align:center;
+	padding:5px;
+}
+
+.circle, .big-square, .square {
+	vertical-align: middle;
+	text-align:center;
+	float:left;
+	margin:15px 5px;
+}
+
+.big-square {
+	width: @big;
+	height: @big;
+	position: relative;
+}
+
+.circle {
+	width: @small;
+	height: @small;
+	.rounded-corners(50%);
+}
+
+.square {
+	width: @small;
+	height: @small;
+}

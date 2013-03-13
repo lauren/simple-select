@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+
+	<head>
+		
+		<meta href="http://google.com" name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta href="http://google.com" http-equiv="x-ua-compatible" content="IE=10">	  
+
+		<link rel="stylesheet" href="css/simple-select.css">	  
+		
+	</head>
+	
+	<body>
+		
+		<p>This page is ugly, but it demonstrates how you can use SimpleSelect.</p>
+		
+		<div class="container">
+			<div class="circle first-half" id="one">
+				<a href="http://google.com" class="link" id="link-one">Link</a>
+			</div>
+			<div class="circle first-half" id="two">
+				<a href="http://google.com" class="link" id="link-two">Link</a>
+			</div>
+			<div class="circle first-half" id="three">
+				<a href="http://google.com" class="link" id="link-three">Link</a>
+			</div>
+			<div class="circle" id="four">
+				<a href="http://google.com" class="link" id="link-four">Link</a>
+			</div>
+			<div class="circle" id="five">
+				<a href="http://google.com" class="link" id="link-five">Link</a>
+			</div>
+			<div class="circle" id="six">
+				<a href="http://google.com" class="link" id="link-six">Link</a>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class="square first-half" id="seven">
+				<a href="http://google.com" class="link" id="link-seven">Link</a>
+			</div>
+			<div class="square first-half" id="eight">
+				<a href="http://google.com" class="link" id="link-eight">Link</a>
+			</div>
+			<div class="square first-half" id="nine">
+				<a href="http://google.com" class="link" id="link-nine">Link</a>
+			</div>
+			<div class="square" id="ten">
+				<a href="http://google.com" class="link" id="link-ten">Link</a>
+			</div>
+			<div class="square" id="eleven">
+				<a href="http://google.com" class="link" id="link-eleven">Link</a>
+			</div>
+			<div class="square" id="twelve">
+				<a href="http://google.com" class="link" id="link-twelve">Link</a>
+			</div>
+		</div>
+
+		<div class="container random">
+			<div>
+				<a href="http://google.com" class="link" id="loner">Link</a>
+			</div>
+			<span>I'm a span</span>
+		</div>
+	
+	<script src="../simple-select.js"></script>	
+	
+	<script type="text/javascript">
+		
+		window.onload = function () {
+			var div = simpleSelect("div");
+			for (var i = 0; i < div.length; i++) {
+				div[i].style.border="1px solid #333";		
+			}
+			var firstHalfCircle = simpleSelect(".circle.first-half");
+			for (var i = 0; i < firstHalfCircle.length; i++) {
+				firstHalfCircle[i].style.backgroundColor="red";				
+			}
+			var firstHalfOrCircle = simpleSelect(".circle .first-half");
+			for (var i = 0; i < firstHalfOrCircle.length; i++) {
+				firstHalfOrCircle[i].style.fontStyle="italic";				
+			}
+			var circle = simpleSelect(".circle");
+			for (var i = 0; i < circle.length; i++) {
+				circle[i].style.fontWeight="bold";				
+			}
+			var firstHalfCircleDiv = simpleSelect("div.circle.first-half");
+			for (var i = 0; i < firstHalfCircleDiv.length; i++) {
+				firstHalfCircleDiv[i].style.borderStyle="dashed";				
+			}
+			var circleDiv = simpleSelect("div.circle");
+			for (var i = 0; i < circleDiv.length; i++) {
+				circleDiv[i].style.borderWidth="4px";				
+			}
+			var circleLink = simpleSelect("div#one a");
+			for (var i = 0; i < circleLink.length; i++) {
+				circleLink[i].style.color="white";				
+			}
+			var seven = simpleSelect("div#seven");
+			for (var i = 0; i < seven.length; i++) {
+				seven[i].style.backgroundColor="green";				
+			}
+			var eight = simpleSelect("#eight");
+			for (var i = 0; i < eight.length; i++) {
+				eight[i].style.backgroundColor="purple";				
+			}
+			var nineOrSpan = simpleSelect("#nine span");
+			for (var i = 0; i < nineOrSpan.length; i++) {
+				nineOrSpan[i].style.backgroundColor="yellow";				
+			}
+			var fourOrRandom = simpleSelect("#four .random");
+			for (var i = 0; i < fourOrRandom.length; i++) {
+				fourOrRandom[i].style.backgroundColor="blue";
+			}
+		}
+	
+	</script>
+				
+	</body>
+	
+</html>
