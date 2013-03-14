@@ -25,7 +25,7 @@ The only major platform I haven't been able to test yet is Android. I'm working 
 <script src="js/simple-select-1.1.0.min.js"></script>
 ```
 		
-2) Use SimpleSelect in your JavaScript like this: 
+2) Use SimpleSelect in your JavaScript like this, anywhere after the DOM has loaded: 
 
 ```javascript
 simpleSelect("div");
@@ -33,7 +33,7 @@ simpleSelect("#id");
 simpleSelect(".class");
 ```
 
-3) simpleSelect will return an array of all matching elements. If there is only a single matching element, it will still be in an array.
+3) SimpleSelect will return an array of all matching elements. If there is only a single matching element, it will still be in an array.
 
 ### Selector Details
 
@@ -116,3 +116,5 @@ Returns any element that has EITHER the class ".class" OR the class ".anotherCla
 ```javascript
 simpleSelect(".class .anotherClass");
 ```
+
+For more details, check out the sample file: https://github.com/lauren/simple-select/tree/master/sample
