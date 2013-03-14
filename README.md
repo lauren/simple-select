@@ -17,7 +17,7 @@ The only major platform I haven't been able to test yet is Android. I'm working 
 
 ## How to Use
 
-1) Download the source (https://github.com/lauren/simple-select/blob/master/simple-select.min.js) and include it in your HTML as follows:
+1) Download the source (https://github.com/lauren/simple-select/blob/master/simple-select-1.0.0.min.js) and include it in your HTML as follows:
 
 **Before the ending `</body>`:**
 
