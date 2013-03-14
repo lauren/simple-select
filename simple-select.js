@@ -63,11 +63,11 @@ var simpleSelect = function () {
               classSelectors[i].push("." + classes[j]);
             }
           }
-        };
+        };        
         
         methods.checkElements(elements,methods.matchToNodeSelectors,nodeSelectors);
-        methods.checkElements(elements,methods.matchToIdSelectors,idSelectors);
-        methods.checkElements(elements,methods.matchToClassSelectors,classSelectors);
+        methods.checkAndPushElements(elements,methods.matchToIdSelectors,idSelectors);
+        methods.checkAndPushElements(elements,methods.matchToClassSelectors,classSelectors);
         return matchingElements;
     },
     
@@ -76,6 +76,16 @@ var simpleSelect = function () {
     checkElements: function (elements,checkingFunction,selectors) {
       for (var i = 0; i < elements.length; i++) {
         checkingFunction(elements[i],selectors);
+      };
+    },
+    
+    // iterates over array of elements and checks them against provided function
+    // with provided array of selectors. if result === true, push to matching elements
+    checkAndPushElements: function (elements,checkingFunction,selectors) {
+      for (var i = 0; i < elements.length; i++) {   
+        if (checkingFunction(elements[i],selectors)) {
+          matchingElements.push(elements[i]);
+        }
       };
     },
     
@@ -93,18 +103,20 @@ var simpleSelect = function () {
         } else {
           var thisNodeSelector = theseNodeSelectors[0].node;
           if (elementNode === thisNodeSelector) {
-            if (theseNodeSelectors[0].hasOwnProperty("classes")) {
-              methods.matchToClassSelectors(element,theseNodeSelectors[0].classes);
-            }
-            if (theseNodeSelectors[0].hasOwnProperty("id")) {
-              methods.matchToIdSelectors(element,[theseNodeSelectors[0].id]);
+            if (theseNodeSelectors[0].hasOwnProperty("classes") &&
+              methods.matchToClassSelectors(element,theseNodeSelectors[0].classes)) {
+                matchingElements.push(element);
+              }
+            if (theseNodeSelectors[0].hasOwnProperty("id") &&
+              methods.matchToIdSelectors(element,[theseNodeSelectors[0].id])) {
+              matchingElements.push(element);
             }
           }
         }
       } else {
+        var remainingSelectors = theseNodeSelectors.slice(1,theseNodeSelectors.length);
         if (typeof theseNodeSelectors[0] === "string") {
           if (elementNode === theseNodeSelectors[0]) {
-            var remainingSelectors = theseNodeSelectors.slice(1,theseNodeSelectors.length);
             for (var i = 0; i < element.children.length; i++) {
               methods.matchToNodeSelectors(element.children[i],remainingSelectors);                
             }
@@ -112,11 +124,14 @@ var simpleSelect = function () {
         } else {
           var thisNodeSelector = theseNodeSelectors[0].node;
           if (elementNode === thisNodeSelector) {
-            if (theseNodeSelectors[0].hasOwnProperty("classes")) {
-              methods.matchToClassSelectors(element,theseNodeSelectors[0].classes);
-            }
-            if (theseNodeSelectors[0].hasOwnProperty("id")) {
-              var remainingSelectors = theseNodeSelectors.slice(1,theseNodeSelectors.length);
+            if (theseNodeSelectors[0].hasOwnProperty("classes") &&
+              methods.matchToClassSelectors(element,theseNodeSelectors[0].classes)) {
+                for (var i = 0; i < element.children.length; i++) {
+                  methods.matchToNodeSelectors(element.children[i],remainingSelectors);                
+                };
+              }
+            if (theseNodeSelectors[0].hasOwnProperty("id") && 
+              methods.matchToIdSelectors(element,[theseNodeSelectors[0].id])) {
               for (var i = 0; i < element.children.length; i++) {
                 methods.matchToNodeSelectors(element.children[i],remainingSelectors);                
               };
@@ -135,40 +150,39 @@ var simpleSelect = function () {
       var elementId = "#" + element.id;
       // there can only be one ID in the selector statement, so use first item in array
       if (elementId === theseIdSelectors[0]) { 
-        matchingElements.push(element) 
+        return true; 
       }
     },
     
     matchToClassSelectors: function (element,theseClassSelectors) {
-      var elementClasses = element.className.split(" ");
+      var elementClasses = element.className.split(" "),
+          result;
       for (var i = 0; i < elementClasses.length; i++) {
         elementClasses[i] = "." + elementClasses[i];
       };
       var matchToClasses = function (classSelectors) {
         if (classSelectors.length === 0) {
-          return false;
+          result = false;
         } else if (classSelectors.length === 1) {
           if (typeof classSelectors[0] === "string") {
             if (methods.inArray(elementClasses,classSelectors[0]) > -1) {
-              matchingElements.push(element);
+              result = true;
             }
           } else {
             if (methods.allInArray(elementClasses,classSelectors[0])) {
-              matchingElements.push(element);
+              result = true;
             }
           }
         } else {
           if (typeof classSelectors[0] === "string") {
             if (methods.inArray(elementClasses,classSelectors[0]) > -1) {
-              matchingElements.push(element);
-              return;
+              result = true;
             } else {
               matchToClasses(classSelectors.slice(1,classSelectors.length));
             }
           } else {
             if (methods.allInArray(elementClasses,classSelectors[0])) {
-              matchingElements.push(element);
-              return;
+              result = true;
             } else {
               matchToClasses(classSelectors.slice(1,classSelectors.length));
             }
@@ -176,6 +190,7 @@ var simpleSelect = function () {
         }
       }
       matchToClasses(theseClassSelectors);
+      return result;
     },
     
     // because IE doesn't like indexOf

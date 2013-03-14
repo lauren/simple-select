@@ -3,8 +3,8 @@
 
 	<head>
 		
-		<meta href="http://google.com" name="viewport" content="width=device-width, initial-scale=1.0">
-	  <meta href="http://google.com" http-equiv="x-ua-compatible" content="IE=10">	  
+		<meta href="#" name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta href="#" http-equiv="x-ua-compatible" content="IE=10">	  
 
 		<link rel="stylesheet" href="css/simple-select.css">	  
 		
@@ -12,55 +12,58 @@
 	
 	<body>
 		
-		<p>This page is ugly, but it demonstrates how you can use SimpleSelect.</p>
+		<p>This page demonstrates how you can use SimpleSelect.</p>
 		
-		<div class="container">
-			<div class="circle first-half" id="one">
-				<a href="http://google.com" class="link" id="link-one">Link</a>
-			</div>
-			<div class="circle first-half" id="two">
-				<a href="http://google.com" class="link" id="link-two">Link</a>
-			</div>
-			<div class="circle first-half" id="three">
-				<a href="http://google.com" class="link" id="link-three">Link</a>
-			</div>
-			<div class="circle" id="four">
-				<a href="http://google.com" class="link" id="link-four">Link</a>
-			</div>
-			<div class="circle" id="five">
-				<a href="http://google.com" class="link" id="link-five">Link</a>
-			</div>
-			<div class="circle" id="six">
-				<a href="http://google.com" class="link" id="link-six">Link</a>
-			</div>
+		<ul>
+			<li><a href="#" id="findDivs">Use simpleSelect("#div") to give all divs a border.</a></li>
+			<li><a href="#" id="findContainerLink">Use simpleSelect("div.container a") to bold links that are direct children of div.container.</a></li>
+			<li><a href="#" id="findFirstHalfSquareDiv">Use simpleSelect("div.square.first-half") to give a dashed border to divs that have the class square AND the class first-half.</a></li>
+			<li><a href="#" id="findContainerDiv">Use simpleSelect("div.container") to make the border of divs with the class .container 2px wide.</a></li>
+			<li><a href="#" id="findDivOne">Use simpleSelect("div#one") to give the div with the ID #one a red background.</a></li>
+			<li><a href="#" id="findDivdivTwoNormalLink">Use simpleSelect("div#two a.normal") to give the an underline to the link with class .normal inside the div with ID #two.</a></li>
+			<li><a href="#" id="findSquareDivSpecialLink">Use simpleSelect("div.square a.special") to find the links with the class .special inside divs with the class .square and make their links purple.</a></li>
+			<li><a href="#" id="findSquare">Use simpleSelect(".square") increase the line height in all elements with the class .square.</a></li>
+			<li><a href="#" id="findFirstHalfOrContainer">Use simpleSelect(".container .first-half") to make the text italic in any div with the class .first-half OR the class .container.</a></li>
+			<li><a href="#" id="findFirstHalfAndSquare">Use simpleSelect(".square.first-half") to make the text bold in any div with the class .first-half And the class .square.</a></li>
+			<li><a href="#" id="findTwo">Use simpleSelect("#two") to give any element with the id #two a yellow background.</a></li>
+			<li><a href="#" id="findThreeOrSpan">Use simpleSelect("#three span") to give any element with the id #three OR any span a green background.</a></li>
+			<li><a href="#" id="findFourOrOhai">Use simpleSelect("#for .ohai") to give any element with the id #four OR the class .ohai a blue background.</a></li>
+		</ul>
+		
+		<div class="square first-half" id="one">
+			div class="square first-half" id="one"<br/>
+			<a href="#" class="normal" id="link-one">link class="normal" id="link-one"</a>
+		</div>
+		<div class="square first-half" id="two">
+			div class="square first-half" id="two"<br/>
+			<a href="#" class="normal" id="link-two">Link class="normal" id="link-two"</a>
+		</div>
+		<div class="square first-half" id="three">
+			div class="square first-half" id="three"<br/>
+			<a href="#" class="normal" id="link-three">Link class="normal" id="link-three"</a>
+		</div>
+		<div class="square" id="four">
+			div class="square" id="four"<br/>
+			<a href="#" class="special" id="link-four">Link class="special" id="link-four"</a>
+		</div>
+		<div class="square" id="five">
+			div class="square first-half" id="five"<br/>
+			<a href="#" class="normal" id="link-five">Link class="normal" id="link-five"</a>
+		</div>
+		<div class="square ohai" id="six">
+			div class="square first-half" id="six"<br/>
+			<a href="#" class="normal" id="link-six">Link class="normal" id="link-six"</a>
 		</div>
 		
-		<div class="container">
-			<div class="square first-half" id="seven">
-				<a href="http://google.com" class="link" id="link-seven">Link</a>
-			</div>
-			<div class="square first-half" id="eight">
-				<a href="http://google.com" class="link" id="link-eight">Link</a>
-			</div>
-			<div class="square first-half" id="nine">
-				<a href="http://google.com" class="link" id="link-nine">Link</a>
-			</div>
-			<div class="square" id="ten">
-				<a href="http://google.com" class="link" id="link-ten">Link</a>
-			</div>
-			<div class="square" id="eleven">
-				<a href="http://google.com" class="link" id="link-eleven">Link</a>
-			</div>
-			<div class="square" id="twelve">
-				<a href="http://google.com" class="link" id="link-twelve">Link</a>
-			</div>
-		</div>
 
-		<div class="container random">
+		<div class="container">
+			div class="container"<br/>
+			<a href="#" class="loner-link" id="container">Link class="loner-link" id="container"</a>
 			<div>
-				<a href="http://google.com" class="link" id="loner">Link</a>
+				div (no classes or ID)<br/>
+				<a href="#" class="loner-link" id="loner">Link class="loner-link" id="loner"</a>
 			</div>
-			<span>I'm a span</span>
+			<span>span (no classes or ID)</span>
 		</div>
 	
 	<script src="../simple-select.js"></script>	
@@ -68,50 +71,131 @@
 	<script type="text/javascript">
 		
 		window.onload = function () {
+			var changeOnClick = function (link,elements,loop) {
+				for (var i = 0; i < link.length; i++) {
+					link[i].addEventListener('click', function (event) {
+						loop(elements);
+						event.target.parentNode.style.display="none";
+					});
+				}
+			};
+			
+			var findDivs = simpleSelect("#findDivs");
 			var div = simpleSelect("div");
-			for (var i = 0; i < div.length; i++) {
-				div[i].style.border="1px solid #333";		
+			var divLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.border="1px solid #333";		
+				}
 			}
-			var firstHalfCircle = simpleSelect(".circle.first-half");
-			for (var i = 0; i < firstHalfCircle.length; i++) {
-				firstHalfCircle[i].style.backgroundColor="red";				
+			changeOnClick(findDivs,div,divLoop);
+			
+			var findContainerLink = simpleSelect("#findContainerLink");
+			var	containerLink = simpleSelect("div.container a");
+			var containerLinkLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.fontWeight="bold";		
+				}
 			}
-			var firstHalfOrCircle = simpleSelect(".circle .first-half");
-			for (var i = 0; i < firstHalfOrCircle.length; i++) {
-				firstHalfOrCircle[i].style.fontStyle="italic";				
+			changeOnClick(findContainerLink,containerLink,containerLinkLoop);
+			
+			var findFirstHalfSquareDiv = simpleSelect("#findFirstHalfSquareDiv");
+			var firstHalfSquareDiv = simpleSelect("div.square.first-half");
+			var firstHalfSquareDivLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.border="1px dashed #333";		
+				}
 			}
-			var circle = simpleSelect(".circle");
-			for (var i = 0; i < circle.length; i++) {
-				circle[i].style.fontWeight="bold";				
+			changeOnClick(findFirstHalfSquareDiv,firstHalfSquareDiv,firstHalfSquareDivLoop);
+			
+			var findContainerDiv = simpleSelect("#findContainerDiv");
+			var containerDiv = simpleSelect("div.container");
+			var findContainerDivLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.borderWidth="2px";		
+				}
 			}
-			var firstHalfCircleDiv = simpleSelect("div.circle.first-half");
-			for (var i = 0; i < firstHalfCircleDiv.length; i++) {
-				firstHalfCircleDiv[i].style.borderStyle="dashed";				
+			changeOnClick(findContainerDiv,containerDiv,findContainerDivLoop);
+			
+			var findDivOne = simpleSelect("#findDivOne");
+			var divOne = simpleSelect("div#one");
+			var divOneLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.backgroundColor="red";		
+				}
 			}
-			var circleDiv = simpleSelect("div.circle");
-			for (var i = 0; i < circleDiv.length; i++) {
-				circleDiv[i].style.borderWidth="4px";				
+			changeOnClick(findDivOne,divOne,divOneLoop);
+			
+			var findDivTwoNormalLink = simpleSelect("#findDivdivTwoNormalLink");
+			var divTwoNormalLink = simpleSelect("div#two a.normal");
+			var divTwoNormalLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.textDecoration="underline";		
+				}
 			}
-			var circleLink = simpleSelect("div#one a");
-			for (var i = 0; i < circleLink.length; i++) {
-				circleLink[i].style.color="white";				
+			changeOnClick(findDivTwoNormalLink,divTwoNormalLink,divTwoNormalLoop);
+			
+			var findSquareDivSpecialLink = simpleSelect("#findSquareDivSpecialLink");
+			var squareDivSpecialLink = simpleSelect("div.square a.special");
+			var squareDivSpecialLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.color="purple";		
+				}
 			}
-			var seven = simpleSelect("div#seven");
-			for (var i = 0; i < seven.length; i++) {
-				seven[i].style.backgroundColor="green";				
+			changeOnClick(findSquareDivSpecialLink,squareDivSpecialLink,squareDivSpecialLoop);
+			
+			var findSquare = simpleSelect("#findSquare");
+			var square = simpleSelect(".square");
+			var squareLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.lineHeight="1.5em";		
+				}
 			}
-			var eight = simpleSelect("#eight");
-			for (var i = 0; i < eight.length; i++) {
-				eight[i].style.backgroundColor="purple";				
+			changeOnClick(findSquare,square,squareLoop);
+			
+			var findFirstHalfOrContainer = simpleSelect("#findFirstHalfOrContainer");
+			var firstHalfOrContainer = simpleSelect(".container .first-half");
+			var firstHalfOrContainerLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.fontStyle="italic";
+				}
 			}
-			var nineOrSpan = simpleSelect("#nine span");
-			for (var i = 0; i < nineOrSpan.length; i++) {
-				nineOrSpan[i].style.backgroundColor="yellow";				
+			changeOnClick(findFirstHalfOrContainer,firstHalfOrContainer,firstHalfOrContainerLoop);
+			
+			var findFirstHalfAndSquare = simpleSelect("#findFirstHalfAndSquare");
+			var firstHalfAndSquare = simpleSelect(".square.first-half");
+			var firstHalfAndSquareLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.fontWeight="bold";
+				}
 			}
-			var fourOrRandom = simpleSelect("#four .random");
-			for (var i = 0; i < fourOrRandom.length; i++) {
-				fourOrRandom[i].style.backgroundColor="blue";
+			changeOnClick(findFirstHalfAndSquare,firstHalfAndSquare,firstHalfAndSquareLoop);
+			
+			var findTwo = simpleSelect("#findTwo");
+			var two = simpleSelect("#two");
+			var twoLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.backgroundColor="yellow";
+				}
 			}
+			changeOnClick(findTwo,two,twoLoop);
+			
+			var findThreeOrSpan = simpleSelect("#findThreeOrSpan");
+			var threeOrSpan = simpleSelect("#three span");
+			var threeOrSpanLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.backgroundColor="green";
+				}
+			}
+			changeOnClick(findThreeOrSpan,threeOrSpan,threeOrSpanLoop);
+			
+			var findFourOrOhai = simpleSelect("#findFourOrOhai");
+			var fourOrOhai = simpleSelect("#four .ohai");
+			var fourOrOhaiLoop = function (elements) {
+				for (var j = 0; j < elements.length; j++) {
+					elements[j].style.backgroundColor="blue";
+				}
+			}
+			changeOnClick(findFourOrOhai,fourOrOhai,fourOrOhaiLoop);
 		}
 	
 	</script>
