@@ -80,7 +80,7 @@ var simpleSelect = function () {
     },
     
     // iterates over array of elements and checks them against provided function
-    // with provided array of selectors. if result === true, push to matching elements
+    // with provided array of selectors. if result === true, push to matchingElements
     checkAndPushElements: function (elements,checkingFunction,selectors) {
       for (var i = 0; i < elements.length; i++) {   
         if (checkingFunction(elements[i],selectors)) {
@@ -228,10 +228,7 @@ var simpleSelect = function () {
 			return result;
 		}
   }
-  
-  var draggable = function (element,container) {
-  }
-  
+
   return methods.selectElements
   
 }();

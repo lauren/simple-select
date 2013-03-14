@@ -66,17 +66,24 @@
 			<span>span (no classes or ID)</span>
 		</div>
 	
-	<script src="../simple-select.js"></script>	
+	<script src="../simple-select-1.0.0.min.js"></script>	
 	
 	<script type="text/javascript">
 		
 		window.onload = function () {
 			var changeOnClick = function (link,elements,loop) {
 				for (var i = 0; i < link.length; i++) {
-					link[i].addEventListener('click', function (event) {
-						loop(elements);
-						event.target.parentNode.style.display="none";
-					});
+					if (link[i].addEventListener) {
+						link[i].addEventListener('click', function (event) {
+							loop(elements);
+							event.target.parentNode.style.display="none";
+						});
+					} else { // for IE 6-8
+						link[i].attachEvent('onclick', function (event) {
+							loop(elements);
+							event.srcElement.parentNode.style.display="none";
+						});
+					}
 				}
 			};
 			
