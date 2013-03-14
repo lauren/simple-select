@@ -1,7 +1,7 @@
 SimpleSelect: a lightweight DOM element selector
 =============
 
-SimpleSelect is a lightweight (2.6KB minified) library for selecting DOM elements by node, class, or ID that works in most major browsers, including IE6+. It's useful when you want to select elements easily but can't afford to add the download time of a full framework.
+SimpleSelect is a lightweight library for selecting DOM elements by node, class, or ID that works in most major browsers, including IE6+. At only 2.6KB minified, it's useful for selecting elements easily when you can't afford to add the download time of a full framework.
 
 ## Tested Browsers
 
