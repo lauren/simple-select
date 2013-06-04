@@ -5,192 +5,178 @@
 
 var simpleSelect = function () {
   
-  var matchingElements = [];
-  
-  var methods = {
+  var matchingElements = [],
+      
+    methods = {
         
     selectElements: function (selectors) {
         matchingElements = []; // make sure matchingElements is empty
-        selectors = selectors.split(" ");
-        var classSelectors = [],
+        var selectors = selectors.split(" "),
+            classSelectors = [],
             idSelectors = [],
             nodeSelectors = [],
             elements = document.getElementsByTagName("*");
-                    
-        // put selectors in ID/class/node selector arrays based on first character
+                                            
+        // change each selector into object with ID/class/node property based
+        // on first character
         for (var i = 0; i < selectors.length; i++) {
-          if (selectors[i].charAt(0) === "#") {
-            idSelectors.push(selectors[i]);
-          }
-          else if (selectors[i].charAt(0) ===".") {
-            classSelectors.push(selectors[i]);
-          } else {
-            nodeSelectors.push(selectors[i]);
-          }
-        };
-              
-        // check node selectors for additional class or ID selectors
-        // if there are any, make the selector into an object 
-        // consisiting of node, id, and as many class names as needed       
-        for (var i = 0; i < nodeSelectors.length; i++) {
-          if (nodeSelectors[i].match(/#/)) {
-            var nodeAndId = nodeSelectors[i].split("#");
-            nodeSelectors[i] = {
-              node: nodeAndId[0], 
-              id: "#" + nodeAndId[1]
-            };
-          } else if (nodeSelectors[i].match(/\./)) {
-            var nodeAndClass = nodeSelectors[i].split("."),
-                classes = [];
-            for (var j = 1; j < nodeAndClass.length; j++) {
-              classes.push("." + nodeAndClass[j]);
-            }
-            nodeSelectors[i] = {
-              node: nodeAndClass[0],
-              classes: [classes]
-            }
+          switch(selectors[i].charAt(0)) {
+            case "#":
+              selectors[i] = {id: selectors[i]};
+              break;
+            case ".":
+              selectors[i] = {classes: [selectors[i]]};
+              break;
+            default:
+              selectors[i] = {node: selectors[i]};
           }
         };
                 
-        // check class selectors for multiple classes
-        // if they exist, make each into an array
-        for (var i = 0; i < classSelectors.length; i++) {
-          var classes = classSelectors[i].split(".");
-          classes = classes.slice(1,classes.length);
-          if (classes.length > 1) {
-            classSelectors[i] = [];
-            for (var j = 0; j < classes.length; j++) {
-              classSelectors[i].push("." + classes[j]);
+        // find additional classes and IDs in the main selector to flush out the object
+        for (var i = 0; i < selectors.length; i++) {
+          if (selectors[i].classes) {
+            selectors[i].classes = methods.findClasses(selectors[i].classes[0]);
+          }
+          if (selectors[i].node) {
+            if (/#/.test(selectors[i].node)) {
+              selectors[i] = methods.findNodeIds(selectors[i].node);
+            }
+            if (/\./.test(selectors[i].node)) {
+              selectors[i].classes = methods.findClasses(selectors[i].node);
+              selectors[i].node = selectors[i].node.split(".")[0];
             }
           }
-        };        
+          if (selectors[i].id) {
+            if (/\./.test(selectors[i].id)) {
+              selectors[i].classes = methods.findClasses(selectors[i].id);
+              selectors[i].id = selectors[i].id.split(".")[0];
+            }
+          }
+        };
         
-        methods.checkElements(elements,methods.matchToNodeSelectors,nodeSelectors);
-        methods.checkAndPushElements(elements,methods.matchToIdSelectors,idSelectors);
-        methods.checkAndPushElements(elements,methods.matchToClassSelectors,classSelectors);
+        methods.checkAndPushElements(elements,methods.matchToSelectors,selectors);
+        
         return matchingElements;
     },
     
-    // iterates over array of elements and checks them against provided function
-    // with provided array of selectors
-    checkElements: function (elements,checkingFunction,selectors) {
-      for (var i = 0; i < elements.length; i++) {
-        checkingFunction(elements[i],selectors);
+    // takes a string like "node#id" and returns an object like {node: node, id: id}
+    findNodeIds: function (string) {
+      var nodeAndId = string.split("#");
+      return {
+        node: nodeAndId[0], 
+        id: "#" + nodeAndId[1]
       };
+    },
+    
+    // takes a astring like "node.class.class" and returns an array like "[class, class]" TBD: does it include leading class?
+    findClasses: function (string) {
+      var classes = string.split(".");
+      classes.shift();
+      for (var i = 0; i < classes.length; i++) {
+        classes[i] = "." + classes[i];
+      }
+      return classes;
     },
     
     // iterates over array of elements and checks them against provided function
     // with provided array of selectors. if result === true, push to matchingElements
     checkAndPushElements: function (elements,checkingFunction,selectors) {
       for (var i = 0; i < elements.length; i++) {   
-        if (checkingFunction(elements[i],selectors)) {
+        if (checkingFunction(elements[i],methods.findAllParents(elements[i],[]),selectors)) {
           matchingElements.push(elements[i]);
         }
       };
     },
     
-    // pushes elements that match the node pattern to the matchingElements array
-    matchToNodeSelectors: function (element,theseNodeSelectors) {
-      var elementNode = element.nodeName.toLowerCase();
-      if (theseNodeSelectors.length === 0) {
-        return false;
-      } else if (theseNodeSelectors.length === 1) {
-        // if node selector doesn't have any class or id specified, just match to element nodeName
-        if (typeof theseNodeSelectors[0] === "string") {
-          if (elementNode === theseNodeSelectors[0]) {
-            matchingElements.push(element);
-          }           
-        } else {
-          var thisNodeSelector = theseNodeSelectors[0].node;
-          if (elementNode === thisNodeSelector) {
-            if (theseNodeSelectors[0].hasOwnProperty("classes") &&
-              methods.matchToClassSelectors(element,theseNodeSelectors[0].classes)) {
-                matchingElements.push(element);
-              }
-            if (theseNodeSelectors[0].hasOwnProperty("id") &&
-              methods.matchToIdSelectors(element,[theseNodeSelectors[0].id])) {
-              matchingElements.push(element);
-            }
-          }
-        }
-      } else {
-        var remainingSelectors = theseNodeSelectors.slice(1,theseNodeSelectors.length);
-        if (typeof theseNodeSelectors[0] === "string") {
-          if (elementNode === theseNodeSelectors[0]) {
-            for (var i = 0; i < element.children.length; i++) {
-              methods.matchToNodeSelectors(element.children[i],remainingSelectors);                
-            }
-          }
-        } else {
-          var thisNodeSelector = theseNodeSelectors[0].node;
-          if (elementNode === thisNodeSelector) {
-            if (theseNodeSelectors[0].hasOwnProperty("classes") &&
-              methods.matchToClassSelectors(element,theseNodeSelectors[0].classes)) {
-                for (var i = 0; i < element.children.length; i++) {
-                  methods.matchToNodeSelectors(element.children[i],remainingSelectors);                
-                };
-              }
-            if (theseNodeSelectors[0].hasOwnProperty("id") && 
-              methods.matchToIdSelectors(element,[theseNodeSelectors[0].id])) {
-              for (var i = 0; i < element.children.length; i++) {
-                methods.matchToNodeSelectors(element.children[i],remainingSelectors);                
-              };
-            } else {
-              return false;
-            }
-          } else {
-            return false;
-          }
-        }
-      }
+    findAllParents: function (thisElement, nodeAndParents) {
+      if (thisElement.parentNode) {
+        nodeAndParents.unshift(thisElement.parentNode);
+        methods.findAllParents(thisElement.parentNode,nodeAndParents);
+      } 
+      nodeAndParents.slice(1,nodeAndParents.length-1);
+      return nodeAndParents;
     },
     
-    // pushes elements that match the ID pattern to the matchingElements array
-    matchToIdSelectors: function (element,theseIdSelectors) {
-      var elementId = "#" + element.id;
-      // there can only be one ID in the selector statement, so use first item in array
-      if (elementId === theseIdSelectors[0]) { 
-        return true; 
-      }
-    },
-    
-    matchToClassSelectors: function (element,theseClassSelectors) {
-      var elementClasses = element.className.split(" "),
+    matchOneElementToOneSelector: function (element,selector) {
+      var elementNode = element.nodeName.toLowerCase(),
+          elementClasses = element.className.split(" "),
+          elementId = "#" + element.id,
           result;
       for (var i = 0; i < elementClasses.length; i++) {
         elementClasses[i] = "." + elementClasses[i];
-      };
-      var matchToClasses = function (classSelectors) {
-        if (classSelectors.length === 0) {
-          result = false;
-        } else if (classSelectors.length === 1) {
-          if (typeof classSelectors[0] === "string") {
-            if (methods.inArray(elementClasses,classSelectors[0]) > -1) {
-              result = true;
-            }
-          } else {
-            if (methods.allInArray(elementClasses,classSelectors[0])) {
-              result = true;
-            }
-          }
+      }
+      if (selector.node) {
+        if (selector.node === elementNode) {
+          result = true;
         } else {
-          if (typeof classSelectors[0] === "string") {
-            if (methods.inArray(elementClasses,classSelectors[0]) > -1) {
-              result = true;
-            } else {
-              matchToClasses(classSelectors.slice(1,classSelectors.length));
-            }
-          } else {
-            if (methods.allInArray(elementClasses,classSelectors[0])) {
-              result = true;
-            } else {
-              matchToClasses(classSelectors.slice(1,classSelectors.length));
-            }
-          }
+          result = false;
+          return result;
         }
       }
-      matchToClasses(theseClassSelectors);
+      if (selector.id) {
+        if (selector.id === elementId) {
+          result = true;
+        } else {
+          result = false;
+          return result;
+        }
+      }
+      if (selector.classes) {
+        if (methods.allInArray(elementClasses,selector.classes)) {
+          result = true;
+        } else {
+          result = false;
+          return result;
+        }
+      }
       return result;
+    },
+    
+    matchSelectorToParents: function (theseParents,thisSelector) {
+      var closestParent = theseParents.slice(0).pop(),
+          currentMatch
+          result = {match: false, matchingElement: false};
+      if (theseParents.length <= 1) {
+        result.match = false;
+        return result;
+      } else {
+        currentMatch = methods.matchOneElementToOneSelector(closestParent,thisSelector);
+        if (currentMatch) {
+          result.match = true
+          result.matchingElement = closestParent;
+          return result;
+        } else {
+          methods.matchSelectorToParents(theseParents.slice(0,theseParents.length-1),thisSelector);
+        }
+      }
+      return result;
+    },
+    
+    matchToSelectors: function (thisElement,theseParents,theseSelectors) {
+      var selectorCount = theseSelectors.length,
+          lastSelector = theseSelectors[selectorCount-1],
+          penultimateSelector = theseSelectors[selectorCount-2],
+          nextMatch,
+          nextMatchParents;
+      if (theseSelectors.length === 0) {
+        return false;
+      } else if (theseSelectors.length === 1) {
+        return methods.matchOneElementToOneSelector(thisElement,theseSelectors[0]);
+      } else {
+        if (methods.matchOneElementToOneSelector(thisElement,lastSelector) && theseParents.length > 1) {
+          nextMatch = methods.matchSelectorToParents(theseParents,penultimateSelector);
+          if (nextMatch.match) {
+            if (theseSelectors.length === 2) {
+              return true;
+            } else {
+              nextMatchParents = methods.findAllParents(nextMatch.matchingElement,[]);
+              methods.matchToSelectors(nextMatch.matchingElement,nextMatchParents,theseSelectors.slice(0,theseSelectors.length-1));
+            }
+          }                  
+        } else {
+          return false;
+        }
+      }
     },
     
     // because IE doesn't like indexOf
@@ -204,7 +190,7 @@ var simpleSelect = function () {
     },
     
     // returns true if all the elements in arrayToCheckAgainst also
-    // exist in arrayToCheckIn
+    // exist in arrayToCheckIn (the reverse does not need to be true)
     allInArray: function (arrayToCheckIn, arrayToCheckAgainst) {
       var result;
       var checkArray = function (checkIn,checkAgainst) {
