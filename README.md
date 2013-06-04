@@ -75,7 +75,7 @@ Returns the div with the ID "#id":
 simpleSelect("div#id");
 ```
 
-Returns elements with the class .class that are children of the div with the ID "#id":
+Returns elements with the class ".class" that are children of the div with the ID "#id":
 
 ```javascript
 simpleSelect("div#id .class");

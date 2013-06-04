@@ -12,9 +12,6 @@ var simpleSelect = function () {
     selectElements: function (selectors) {
         matchingElements = []; // make sure matchingElements is empty
         var selectors = selectors.split(" "),
-            classSelectors = [],
-            idSelectors = [],
-            nodeSelectors = [],
             elements = document.getElementsByTagName("*");
                                             
         // change each selector into object with ID/class/node property based
@@ -53,7 +50,9 @@ var simpleSelect = function () {
             }
           }
         };
+        
         methods.checkAndPushElements(elements,methods.matchToSelectors,selectors);
+        
         console.log(matchingElements);
         return matchingElements;
     },
@@ -87,10 +86,10 @@ var simpleSelect = function () {
       };
     },
     
-    findAllParents: function (thisElement, nodeAndParents) {
+    findAllParents: function (thisElement, parents) {
       if (thisElement.parentNode) {
         nodeAndParents.unshift(thisElement.parentNode);
-        methods.findAllParents(thisElement.parentNode,nodeAndParents);
+        methods.findAllParents(thisElement.parentNode,parents);
       } 
       nodeAndParents.slice(1,nodeAndParents.length-1);
       return nodeAndParents;
@@ -219,6 +218,6 @@ var simpleSelect = function () {
     }
   };
 
-  return methods.selectElements
+  return methods.selectElements;
   
 }();
