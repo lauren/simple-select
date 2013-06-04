@@ -88,11 +88,11 @@ var simpleSelect = function () {
     
     findAllParents: function (thisElement, parents) {
       if (thisElement.parentNode) {
-        nodeAndParents.unshift(thisElement.parentNode);
+        parents.unshift(thisElement.parentNode);
         methods.findAllParents(thisElement.parentNode,parents);
       } 
-      nodeAndParents.slice(1,nodeAndParents.length-1);
-      return nodeAndParents;
+      parents.slice(1,parents.length-1);
+      return parents;
     },
     
     matchOneElementToOneSelector: function (element,selector) {
