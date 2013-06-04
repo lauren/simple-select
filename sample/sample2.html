@@ -89,15 +89,15 @@
 					}
 				};
 			
-				// var findDivs = simpleSelect("#findDivs");
-				// var div = simpleSelect("div");
-				// var divLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.border="1px solid #333";		
-				// 	}
-				// }
-				// changeOnClick(findDivs,div,divLoop);
-				// 
+				var findDivs = simpleSelect("#findDivs");
+				var div = simpleSelect("div");
+				var divLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.border="1px solid #333";		
+					}
+				}
+				changeOnClick(findDivs,div,divLoop);
+				
 				var findContainerLink = simpleSelect("#findContainerLink");
 				var	containerLink = simpleSelect("div.container a");
 				var containerLinkLoop = function (elements) {
@@ -106,71 +106,71 @@
 					}
 				}
 				changeOnClick(findContainerLink,containerLink,containerLinkLoop);
-				// 
-				// var findFirstHalfSquareDiv = simpleSelect("#findFirstHalfSquareDiv");
-				// var firstHalfSquareDiv = simpleSelect("div.square.first-half");
-				// var firstHalfSquareDivLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.border="1px dashed #333";		
-				// 	}
-				// }
-				// changeOnClick(findFirstHalfSquareDiv,firstHalfSquareDiv,firstHalfSquareDivLoop);
-				// 
-				// var findContainerDiv = simpleSelect("#findContainerDiv");
-				// var containerDiv = simpleSelect("div.container");
-				// var findContainerDivLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.borderWidth="2px";		
-				// 	}
-				// }
-				// changeOnClick(findContainerDiv,containerDiv,findContainerDivLoop);
-				// 
-				// var findDivOne = simpleSelect("#findDivOne");
-				// var divOne = simpleSelect("div#one");
-				// var divOneLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.backgroundColor="red";		
-				// 	}
-				// }
-				// changeOnClick(findDivOne,divOne,divOneLoop);
-				// 
-				// var findDivTwoNormalLink = simpleSelect("#findDivdivTwoNormalLink");
-				// var divTwoNormalLink = simpleSelect("div#two a.normal");
-				// var divTwoNormalLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.textDecoration="underline";		
-				// 	}
-				// }
-				// changeOnClick(findDivTwoNormalLink,divTwoNormalLink,divTwoNormalLoop);
-				// 
-				// var findFirstHalfNormal = simpleSelect("#findFirstHalfNormal");
-				// var firstHalfNormal = simpleSelect(".first-half .normal");
-				// var firstHalfNormalLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.fontStyle="italic";		
-				// 	}
-				// }
-				// changeOnClick(findFirstHalfNormal,firstHalfNormal,firstHalfNormalLoop);
-				// 
-				// var findSquareDivSpecialLink = simpleSelect("#findSquareDivSpecialLink");
-				// var squareDivSpecialLink = simpleSelect("div.square a.special");
-				// var squareDivSpecialLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.color="purple";		
-				// 	}
-				// }
-				// changeOnClick(findSquareDivSpecialLink,squareDivSpecialLink,squareDivSpecialLoop);
-				// 
-				// var findLinkFive = simpleSelect("#findLinkFive");
-				// var linkFive = simpleSelect("#five #link-five");
-				// var linkFiveLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.backgroundColor="yellow";		
-				// 	}
-				// }
-				// changeOnClick(findLinkFive,linkFive,linkFiveLoop);
-				// 
-				// var findInnerLoner = simpleSelect("#findInnerLoner");
+				
+				var findFirstHalfSquareDiv = simpleSelect("#findFirstHalfSquareDiv");
+				var firstHalfSquareDiv = simpleSelect("div.square.first-half");
+				var firstHalfSquareDivLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.border="1px dashed #333";		
+					}
+				}
+				changeOnClick(findFirstHalfSquareDiv,firstHalfSquareDiv,firstHalfSquareDivLoop);
+				
+				var findContainerDiv = simpleSelect("#findContainerDiv");
+				var containerDiv = simpleSelect("div.container");
+				var findContainerDivLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.borderWidth="2px";		
+					}
+				}
+				changeOnClick(findContainerDiv,containerDiv,findContainerDivLoop);
+				
+				var findDivOne = simpleSelect("#findDivOne");
+				var divOne = simpleSelect("div#one");
+				var divOneLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.backgroundColor="red";		
+					}
+				}
+				changeOnClick(findDivOne,divOne,divOneLoop);
+				
+				var findDivTwoNormalLink = simpleSelect("#findDivdivTwoNormalLink");
+				var divTwoNormalLink = simpleSelect("div#two a.normal");
+				var divTwoNormalLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.textDecoration="underline";		
+					}
+				}
+				changeOnClick(findDivTwoNormalLink,divTwoNormalLink,divTwoNormalLoop);
+				
+				var findFirstHalfNormal = simpleSelect("#findFirstHalfNormal");
+				var firstHalfNormal = simpleSelect(".first-half .normal");
+				var firstHalfNormalLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.fontStyle="italic";		
+					}
+				}
+				changeOnClick(findFirstHalfNormal,firstHalfNormal,firstHalfNormalLoop);
+				
+				var findSquareDivSpecialLink = simpleSelect("#findSquareDivSpecialLink");
+				var squareDivSpecialLink = simpleSelect("div.square a.special");
+				var squareDivSpecialLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.color="purple";		
+					}
+				}
+				changeOnClick(findSquareDivSpecialLink,squareDivSpecialLink,squareDivSpecialLoop);
+				
+				var findLinkFive = simpleSelect("#findLinkFive");
+				var linkFive = simpleSelect("#five #link-five");
+				var linkFiveLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.backgroundColor="yellow";		
+					}
+				}
+				changeOnClick(findLinkFive,linkFive,linkFiveLoop);
+				
+				var findInnerLoner = simpleSelect("#findInnerLoner");
 				var innerLoner = simpleSelect(".container .inner-container .loner-link");
 				var innerLonerLoop = function (elements) {
 					for (var j = 0; j < elements.length; j++) {
@@ -179,41 +179,41 @@
 				}
 				changeOnClick(findInnerLoner,innerLoner,innerLonerLoop);
 				
-				// var findSquare = simpleSelect("#findSquare");
-				// var square = simpleSelect(".square");
-				// var squareLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.lineHeight="1.5em";		
-				// 	}
-				// }
-				// changeOnClick(findSquare,square,squareLoop);
-				// 
-				// var findFirstHalfAndSquare = simpleSelect("#findFirstHalfAndSquare");
-				// var firstHalfAndSquare = simpleSelect(".square.first-half");
-				// var firstHalfAndSquareLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.fontWeight="bold";
-				// 	}
-				// }
-				// changeOnClick(findFirstHalfAndSquare,firstHalfAndSquare,firstHalfAndSquareLoop);
-				// 
-				// var findTwo = simpleSelect("#findTwo");
-				// var two = simpleSelect("#two");
-				// var twoLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.backgroundColor="yellow";
-				// 	}
-				// }
-				// changeOnClick(findTwo,two,twoLoop);
-				// 
-				// var findFourOrOhai = simpleSelect("#findFourOrOhai");
-				// var fourOrOhai = simpleSelect("#four .ohai");
-				// var fourOrOhaiLoop = function (elements) {
-				// 	for (var j = 0; j < elements.length; j++) {
-				// 		elements[j].style.backgroundColor="blue";
-				// 	}
-				// }
-				// changeOnClick(findFourOrOhai,fourOrOhai,fourOrOhaiLoop);
+				var findSquare = simpleSelect("#findSquare");
+				var square = simpleSelect(".square");
+				var squareLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.lineHeight="1.5em";		
+					}
+				}
+				changeOnClick(findSquare,square,squareLoop);
+				
+				var findFirstHalfAndSquare = simpleSelect("#findFirstHalfAndSquare");
+				var firstHalfAndSquare = simpleSelect(".square.first-half");
+				var firstHalfAndSquareLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.fontWeight="bold";
+					}
+				}
+				changeOnClick(findFirstHalfAndSquare,firstHalfAndSquare,firstHalfAndSquareLoop);
+				
+				var findTwo = simpleSelect("#findTwo");
+				var two = simpleSelect("#two");
+				var twoLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.backgroundColor="yellow";
+					}
+				}
+				changeOnClick(findTwo,two,twoLoop);
+				
+				var findFourOrOhai = simpleSelect("#findFourOrOhai");
+				var fourOrOhai = simpleSelect("#four .ohai");
+				var fourOrOhaiLoop = function (elements) {
+					for (var j = 0; j < elements.length; j++) {
+						elements[j].style.backgroundColor="blue";
+					}
+				}
+				changeOnClick(findFourOrOhai,fourOrOhai,fourOrOhaiLoop);
 			}
 		})();
 	

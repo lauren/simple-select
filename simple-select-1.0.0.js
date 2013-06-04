@@ -53,7 +53,6 @@ var simpleSelect = function () {
             }
           }
         };
-        
         methods.checkAndPushElements(elements,methods.matchToSelectors,selectors);
         
         return matchingElements;
