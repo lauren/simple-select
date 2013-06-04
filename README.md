@@ -45,7 +45,7 @@ Returns all divs:
 simpleSelect("div");
 ```
 
-Returns all links that are direct descendants of divs. Does NOT return links that are non-direct descendants of divs:
+Returns all links that are descendants of divs:
 
 ```javascript
 simpleSelect("div a");
@@ -57,13 +57,13 @@ Returns all divs with the class ".class":
 simpleSelect("div.class");
 ```
 
-Returns all divs AND all elements of any type with the class ".class":
+Returns all elements with the class .class that are the descendant of a div:
 
 ```javascript
 simpleSelect("div .class");
 ```
 
-Returns all divs that have BOTH the class ".class" AND the class ".anotherClass":
+Returns all divs that the class ".class" AND the class ".anotherClass":
 
 ```javascript
 simpleSelect("div.class.anotherClass");
@@ -75,13 +75,13 @@ Returns the div with the ID "#id":
 simpleSelect("div#id");
 ```
 
-Returns the div with the ID "#id" AND all elements of any type with the class ".class":
+Returns elements with the class .class that are children of the div with the ID "#id":
 
 ```javascript
 simpleSelect("div#id .class");
 ```
 
-Returns the link with the ID "#anotherId" that is the direct descendant of the div with the ID "#id":
+Returns the link with the ID "#anotherId" that is the descendant of the div with the ID "#id":
 
 ```javascript
 simpleSelect("div#id a#anotherId");
@@ -93,7 +93,7 @@ Returns the element with the ID "#id":
 simpleSelect("#id");
 ```
 
-Returns the element with the ID "#id" AND any element with the class ".class":
+Returns elements with the class ".class" that are children of the element with the ID "#id":
 
 ```javascript
 simpleSelect("#id .class");
@@ -111,7 +111,7 @@ Returns any element that has BOTH the ID ".class" AND the class ".anotherClass":
 simpleSelect(".class.anotherClass");
 ```
 
-Returns any element that has EITHER the class ".class" OR the class ".anotherClass":
+Returns any element with the class ".anotherClass" that's the descendant of an element with the class ".class":
 
 ```javascript
 simpleSelect(".class .anotherClass");
