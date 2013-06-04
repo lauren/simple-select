@@ -22,7 +22,7 @@
 			<li><a href="#" id="findDivOne">Use simpleSelect("div#one") to give the div with the ID #one a red background.</a></li>
 			<li><a href="#" id="findDivdivTwoNormalLink">Use simpleSelect("div#two a.normal") to give the an underline to the link with class .normal inside the div with ID #two.</a></li>
 			<li><a href="#" id="findFirstHalfNormal">Use simpleSelect(".first-half .normal") to italicize any text inside an element with the class .normal that has a parent class .first-half.</a></li>
-			<li><a href="#" id="findLinkFive">Use simpleSelect("#five #link-five") give a yellow background to any element with the ID #link-five inside an element with the ID #five.</a></li>
+			<li><a href="#" id="findLinkFive">Use simpleSelect("#five .normal") give a yellow background to any element with the ID #link-five inside an element with the ID #five.</a></li>
 			<li><a href="#" id="findInnerLoner">Use simpleSelect(".container .inner-container .loner-link") give a green background to any element with the ID #loner inside an element with the class .inner-container inside an element with the class .container.</a></li>
 			<li><a href="#" id="findSquareDivSpecialLink">Use simpleSelect("div.square a.special") to find the links with the class .special inside divs with the class .square and make their links purple.</a></li>
 			<li><a href="#" id="findSquare">Use simpleSelect(".square") increase the line height in all elements with the class .square.</a></li>
@@ -162,7 +162,7 @@
 				changeOnClick(findSquareDivSpecialLink,squareDivSpecialLink,squareDivSpecialLoop);
 				
 				var findLinkFive = simpleSelect("#findLinkFive");
-				var linkFive = simpleSelect("#five #link-five");
+				var linkFive = simpleSelect("#five .normal");
 				var linkFiveLoop = function (elements) {
 					for (var j = 0; j < elements.length; j++) {
 						elements[j].style.backgroundColor="yellow";		
@@ -205,15 +205,6 @@
 					}
 				}
 				changeOnClick(findTwo,two,twoLoop);
-				
-				var findFourOrOhai = simpleSelect("#findFourOrOhai");
-				var fourOrOhai = simpleSelect("#four .ohai");
-				var fourOrOhaiLoop = function (elements) {
-					for (var j = 0; j < elements.length; j++) {
-						elements[j].style.backgroundColor="blue";
-					}
-				}
-				changeOnClick(findFourOrOhai,fourOrOhai,fourOrOhaiLoop);
 			}
 		})();
 	

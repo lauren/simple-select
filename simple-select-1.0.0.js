@@ -54,7 +54,7 @@ var simpleSelect = function () {
           }
         };
         methods.checkAndPushElements(elements,methods.matchToSelectors,selectors);
-        
+        console.log(matchingElements);
         return matchingElements;
     },
     
@@ -156,26 +156,31 @@ var simpleSelect = function () {
           lastSelector = theseSelectors[selectorCount-1],
           penultimateSelector = theseSelectors[selectorCount-2],
           nextMatch,
-          nextMatchParents;
+          nextMatchParents,
+          result;
       if (theseSelectors.length === 0) {
-        return false;
+        result = false;
       } else if (theseSelectors.length === 1) {
-        return methods.matchOneElementToOneSelector(thisElement,theseSelectors[0]);
+        result = methods.matchOneElementToOneSelector(thisElement,theseSelectors[0]);
       } else {
         if (methods.matchOneElementToOneSelector(thisElement,lastSelector) && theseParents.length > 1) {
           nextMatch = methods.matchSelectorToParents(theseParents,penultimateSelector);
           if (nextMatch.match) {
             if (theseSelectors.length === 2) {
-              return true;
+              result = true;
             } else {
               nextMatchParents = methods.findAllParents(nextMatch.matchingElement,[]);
-              methods.matchToSelectors(nextMatch.matchingElement,nextMatchParents,theseSelectors.slice(0,theseSelectors.length-1));
+              return methods.matchToSelectors(nextMatch.matchingElement,nextMatchParents,
+                theseSelectors.slice(0,theseSelectors.length-1));
             }
-          }                  
+          } else {
+            result = false;
+          }              
         } else {
-          return false;
+          result = false;
         }
       }
+      return result;
     },
     
     // because IE doesn't like indexOf
