@@ -107,24 +107,21 @@ var simpleSelect = function () {
         if (selector.node === elementNode) {
           result = true;
         } else {
-          result = false;
-          return result;
+          return result = false;
         }
       }
       if (selector.id) {
         if (selector.id === elementId) {
           result = true;
         } else {
-          result = false;
-          return result;
+          return result = false;
         }
       }
       if (selector.classes) {
         if (methods.allInArray(elementClasses,selector.classes)) {
           result = true;
         } else {
-          result = false;
-          return result;
+          return result = false;
         }
       }
       return result;
