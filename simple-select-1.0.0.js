@@ -101,7 +101,6 @@ var simpleSelect = function () {
             parents.unshift(thisElement.parentNode);
             findAllParents(thisElement.parentNode,parents);
         } 
-        parents.slice(1,parents.length-1);
         return parents;
     };
     
