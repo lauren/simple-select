@@ -192,21 +192,18 @@ var simpleSelect = function () {
     
     // returns true if all the elements in arrayToCheckAgainst also
     // exist in arrayToCheckIn (the reverse does not need to be true)
-    var allInArray = function (arrayToCheckIn, arrayToCheckAgainst) {
-	var checkArray = function (checkIn,checkAgainst) {
-	    if (checkAgainst.length === 0) {
-		return false;
-	    } else if (checkAgainst.length === 1) {
-		return (inArray(checkIn,checkAgainst[0]) > -1);
+    var allInArray = function (checkIn, checkAgainst) {
+	if (checkAgainst.length === 0) {
+	    return false;
+	} else if (checkAgainst.length === 1) {
+	    return inArray(checkIn,checkAgainst[0]) > -1;
+	} else {
+	    if (inArray(checkIn,checkAgainst[0]) > -1) {
+		allInArray(checkIn,checkAgainst.slice(1,(checkAgainst.length)));
 	    } else {
-		if (inArray(checkIn,checkAgainst[0]) > -1) {
-		    checkArray(checkIn,checkAgainst.slice(1,(checkAgainst.length)));
-		} else {
-		    return false;
-		}
+		return false;
 	    }
 	}
-	return checkArray(arrayToCheckIn,arrayToCheckAgainst);
     };
 
     return selectElements;
