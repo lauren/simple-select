@@ -197,7 +197,7 @@ var simpleSelect = function () {
 	    if (checkAgainst.length === 0) {
 		return false;
 	    } else if (checkAgainst.length === 1) {
-		return (inArray(checkIn,checkAgainst[0]) > -1) ? true : false;
+		return (inArray(checkIn,checkAgainst[0]) > -1);
 	    } else {
 		if (inArray(checkIn,checkAgainst[0]) > -1) {
 		    checkArray(checkIn,checkAgainst.slice(1,(checkAgainst.length)));
