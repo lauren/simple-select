@@ -123,7 +123,7 @@ var simpleSelect = function () {
 	    result = (selector.id === elementId);
 	}
 	if (selector.classes) {
-	    result = allInArray(elementClasses,selector.classes)
+	    result = isSubset(selector.classes, elementClasses)
 	}
 	return result;
     };
@@ -189,21 +189,11 @@ var simpleSelect = function () {
 	};
 	return -1;
     };
-    
-    // returns true if all the elements in arrayToCheckAgainst also
-    // exist in arrayToCheckIn (the reverse does not need to be true)
-    var allInArray = function (checkIn, checkAgainst) {
-	if (checkAgainst.length === 0) {
-	    return false;
-	} else if (checkAgainst.length === 1) {
-	    return inArray(checkIn,checkAgainst[0]) > -1;
-	} else {
-	    if (inArray(checkIn,checkAgainst[0]) > -1) {
-		allInArray(checkIn,checkAgainst.slice(1,(checkAgainst.length)));
-	    } else {
-		return false;
-	    }
-	}
+
+    // Check if xs is a subset of ys (every element of xs is an element of ys).
+    var isSubset = function(xs, ys) {
+	if (xs.length === 0) return true;
+	return (inArray(ys, xs[0]) > -1) && isSubset(xs.slice(1), ys);
     };
 
     return selectElements;
