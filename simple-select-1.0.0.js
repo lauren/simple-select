@@ -89,18 +89,19 @@ var simpleSelect = function () {
     var checkAndPushElements = function (elements,checkingFunction,selectors) {
         var matchingElements = [];
         for (var i = 0; i < elements.length; i++) {   
-            if (checkingFunction(elements[i],findAllParents(elements[i],[]),selectors)) {
+            if (checkingFunction(elements[i],findAllParents(elements[i]),selectors)) {
                 matchingElements.push(elements[i]);
             }
         };
         return matchingElements;
     };
     
-    var findAllParents = function (thisElement, parents) {
-        if (thisElement.parentNode) {
+    var findAllParents = function (thisElement) {
+        var parents = [];
+        while (thisElement.parentNode) {
             parents.unshift(thisElement.parentNode);
-            findAllParents(thisElement.parentNode,parents);
-        } 
+            thisElement = thisElement.parentNode;
+        }
         return parents;
     };
     
@@ -163,7 +164,7 @@ var simpleSelect = function () {
                     if (theseSelectors.length === 2) {
                         result = true;
                     } else {
-                        nextMatchParents = findAllParents(nextMatch.matchingElement,[]);
+                        nextMatchParents = findAllParents(nextMatch.matchingElement);
                         return matchToSelectors(nextMatch.matchingElement,nextMatchParents,
                                                 theseSelectors.slice(0,theseSelectors.length-1));
                     }
