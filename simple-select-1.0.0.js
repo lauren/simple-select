@@ -4,9 +4,7 @@
  */
 
 var simpleSelect = function () {
-    var matchingElements = [];
     var selectElements = function (selectors) {
-        matchingElements = []; // make sure matchingElements is empty
         var selectors = selectors.split(" "),
             elements = document.getElementsByTagName("*");
         
@@ -64,9 +62,7 @@ var simpleSelect = function () {
             }
         };
         
-        checkAndPushElements(elements,matchToSelectors,selectors);
-        
-        return matchingElements;
+        return checkAndPushElements(elements,matchToSelectors,selectors);
     };
     
     // takes a string like "node#id" and returns an object like {node: node, id: id}
@@ -91,11 +87,13 @@ var simpleSelect = function () {
     // iterates over array of elements and checks them against provided function
     // with provided array of selectors. if result === true, push to matchingElements
     var checkAndPushElements = function (elements,checkingFunction,selectors) {
+        var matchingElements = [];
         for (var i = 0; i < elements.length; i++) {   
             if (checkingFunction(elements[i],findAllParents(elements[i],[]),selectors)) {
                 matchingElements.push(elements[i]);
             }
         };
+        return matchingElements;
     };
     
     var findAllParents = function (thisElement, parents) {
