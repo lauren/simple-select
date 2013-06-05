@@ -95,6 +95,7 @@ var simpleSelect = function () {
       return parents;
     },
     
+    
     matchOneElementToOneSelector: function (element,selector) {
       var elementNode = element.nodeName.toLowerCase(),
           elementClasses = element.className.split(" "),
@@ -104,25 +105,13 @@ var simpleSelect = function () {
         elementClasses[i] = "." + elementClasses[i];
       }
       if (selector.node) {
-        if (selector.node === elementNode) {
-          result = true;
-        } else {
-          return result = false;
-        }
+        result = (selector.node === elementNode);
       }
       if (selector.id) {
-        if (selector.id === elementId) {
-          result = true;
-        } else {
-          return result = false;
-        }
+        result = (selector.id === elementId);
       }
       if (selector.classes) {
-        if (methods.allInArray(elementClasses,selector.classes)) {
-          result = true;
-        } else {
-          return result = false;
-        }
+        result = methods.allInArray(elementClasses,selector.classes)
       }
       return result;
     },
