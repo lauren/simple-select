@@ -16,6 +16,8 @@ var simpleSelect = function () {
                                             
         // change each selector into object with ID/class/node property based
         // on first character
+        // we're going from ["node.class", "node#id", "#id.class.class", ".class.class"] to
+        // [{node: 'node.class'}, {node: 'node#id'}, {id: #id.class.class}, {classes: ["class.class"]}]
         for (var i = 0; i < selectors.length; i++) {
           switch(selectors[i].charAt(0)) {
             case "#":
@@ -30,6 +32,21 @@ var simpleSelect = function () {
         };
                 
         // find additional classes and IDs in the main selector to flush out the object
+        // we're going from 
+        // [{node: 'node.class'}, {node: 'node#id'}, {id: #id.class.class}, {classes: ["class.class"]}] to
+        // [
+        //   {node: "node",
+        //    classes: [".class"]
+        //   },
+        //   {node: "node",
+        //    id: "#id"
+        //   },
+        //   {id: "#id",
+        //    classes: [".class", ".class"]
+        //   },
+        //   {classes: [".class", ".class"]
+        //   }
+        // ]
         for (var i = 0; i < selectors.length; i++) {
           if (selectors[i].classes) {
             selectors[i].classes = methods.findClasses(selectors[i].classes[0]);
@@ -53,7 +70,6 @@ var simpleSelect = function () {
         
         methods.checkAndPushElements(elements,methods.matchToSelectors,selectors);
         
-        console.log(matchingElements);
         return matchingElements;
     },
     
@@ -186,11 +202,7 @@ var simpleSelect = function () {
         if (checkAgainst.length === 0) {
           result = false;
         } else if (checkAgainst.length === 1) {
-          if (methods.inArray(checkIn,checkAgainst[0]) > -1) {
-            result = true;
-          } else {
-            result = false;
-          }
+          result = (methods.inArray(checkIn,checkAgainst[0]) > -1) ? true : false;
         } else {
           if (methods.inArray(checkIn,checkAgainst[0]) > -1) {
             checkArray(checkIn,checkAgainst.slice(1,(checkAgainst.length)));
