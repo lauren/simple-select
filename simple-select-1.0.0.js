@@ -180,7 +180,7 @@ var simpleSelect = function () {
     // Check if xs is a subset of ys (every element of xs is an element of ys).
     var isSubset = function(xs, ys) {
         if (xs.length === 0) return true;
-	return (inArray(ys, xs[0]) > -1) && isSubset(xs.slice(1), ys);
+	      return (inArray(ys, xs[0]) > -1) && isSubset(xs.slice(1), ys);
     };
 
     return selectElements;
