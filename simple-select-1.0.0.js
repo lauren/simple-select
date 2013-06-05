@@ -28,19 +28,8 @@ var simpleSelect = function () {
         // find additional classes and IDs in the main selector to flush out the object
         // we're going from 
         // [{node: 'node.class'}, {node: 'node#id'}, {id: #id.class.class}, {classes: ["class.class"]}] to
-        // [
-        //   {node: "node",
-        //    classes: [".class"]
-        //   },
-        //   {node: "node",
-        //    id: "#id"
-        //   },
-        //   {id: "#id",
-        //    classes: [".class", ".class"]
-        //   },
-        //   {classes: [".class", ".class"]
-        //   }
-        // ]
+        // [{node: "node", classes: [".class"]}, {node: "node", id: "#id"}, 
+        // {id: "#id", classes: [".class", ".class"]}, {classes: [".class", ".class"]}]
         for (var i = 0; i < selectors.length; i++) {
             if (selectors[i].classes) {
                 selectors[i].classes = findClasses(selectors[i].classes[0]);
