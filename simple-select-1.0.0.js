@@ -23,7 +23,6 @@
       switch(selectors[i].charAt(0)) {
         case "#":
           selectors[i] = {id: selectors[i]};
-          findClassesInObject(selectors[i]);
           break;
         case ".":
           selectors[i] = {classes: findClasses(selectors[i])};
@@ -33,7 +32,7 @@
           if (/#/.test(selectors[i].node)) {
             selectors[i] = findNodeIds(selectors[i].node);
           }
-          findClassesInObject(selectors[i]);
+        findClassesInObject(selectors[i]);
       }
     };
   
