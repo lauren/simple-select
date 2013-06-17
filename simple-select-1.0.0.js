@@ -3,8 +3,8 @@
  * https://github.com/lauren/simple-select/blob/master/LICENSE
  */
 
-var simpleSelect = function () {
-  var selectElements = function (selectors) {
+;(function (exports) {
+  var simpleSelect = function (selectors) {
     var selectors = parseSelectors(selectors),
         elements = document.getElementsByTagName("*");
       
@@ -35,6 +35,11 @@ var simpleSelect = function () {
     // [{node: 'node.class'}, {node: 'node#id'}, {id: #id.class.class}, {classes: ["class.class"]}] to
     // [{node: "node", classes: [".class"]}, {node: "node", id: "#id"}, 
     // {id: "#id", classes: [".class", ".class"]}, {classes: [".class", ".class"]}]
+    // TODO: make an object with all the functions that happen for each case, then call it from another function like
+    // var handler = function (stuff) {
+    // return handlers[thing]();
+    //}
+    // use map instead of looping var result = [0,1,2].map(function () {}) ? won't work in IE6 :(
     for (var i = 0; i < selectors.length; i++) {
       if (selectors[i].classes) {
         selectors[i].classes = findClasses(selectors[i].classes[0]);
@@ -67,7 +72,7 @@ var simpleSelect = function () {
     };
   };
   
-  // takes a astring like "node.class.class" and returns an array like "[class, class]" TBD: does it include leading class?
+  // takes a astring like "node.class.class" and returns an array like "[class, class]"
   var findClasses = function (string) {
     var classes = string.split(".");
     classes.shift();
@@ -138,6 +143,7 @@ var simpleSelect = function () {
     return result;
   };
   
+  //change theseParents to ancestors
   var matchToSelectors = function (thisElement,theseParents,theseSelectors) {
     var selectorCount = theseSelectors.length,
         lastSelector = theseSelectors[selectorCount-1],
@@ -179,6 +185,6 @@ var simpleSelect = function () {
     return (xs.length === 0) ? true : (inArray(ys, xs[0]) > -1) && isSubset(xs.slice(1), ys);
   };
 
-  return selectElements;
+  exports.simpleSelect = simpleSelect;
     
-}();
+})(this);
